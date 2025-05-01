@@ -1,7 +1,10 @@
 package dangminhphuc.dev.demo;
 
 public class BookService {
-    private final BookRepo bookRepo;
+    private BookRepo bookRepo;
+
+    public BookService() {
+    }
 
     public BookService(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
