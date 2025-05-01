@@ -1,0 +1,30 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>dangminhphuc.dev.demo</groupId>
+        <artifactId>dm-spring</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>spring-core</artifactId>
+    <packaging>pom</packaging>
+
+    <name>spring-core</name>
+    <url>http://maven.apache.org</url>
+    <modules>
+        <module>dependency-injection</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>6.2.6</version>
+        </dependency>
+    </dependencies>
+</project>
