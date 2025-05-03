@@ -1,8 +1,5 @@
-package dangminhphuc.dev.demo.annotation;
+package dangminhphuc.dev.demo.javabased;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class UserService {
     private final UserRepository repo;
 

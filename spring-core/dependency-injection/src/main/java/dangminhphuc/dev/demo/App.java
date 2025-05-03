@@ -1,8 +1,10 @@
 package dangminhphuc.dev.demo;
 
 import dangminhphuc.dev.demo.annotation.AnnotationConfig;
-import dangminhphuc.dev.demo.annotation.User;
-import dangminhphuc.dev.demo.annotation.UserService;
+import dangminhphuc.dev.demo.annotation.Car;
+import dangminhphuc.dev.demo.javabased.JavaBasedConfig;
+import dangminhphuc.dev.demo.javabased.User;
+import dangminhphuc.dev.demo.javabased.UserService;
 import dangminhphuc.dev.demo.xml.Book;
 import dangminhphuc.dev.demo.xml.BookService;
 import org.springframework.context.ApplicationContext;
@@ -19,10 +21,16 @@ public class App {
 
         System.out.println("---");
 
-        ApplicationContext annotationContext = new AnnotationConfigApplicationContext(AnnotationConfig.class);
-        UserService userService = annotationContext.getBean(UserService.class);
+        ApplicationContext javaContext = new AnnotationConfigApplicationContext(JavaBasedConfig.class);
+        UserService userService = javaContext.getBean(UserService.class);
         userService.addUser(new User("dangminhphuc"));
         userService.addUser(new User("dangminhphuc.dev"));
         userService.allUser();
+
+        System.out.println("---");
+
+        new AnnotationConfigApplicationContext(AnnotationConfig.class)
+                .getBean(Car.class)
+                .start();
     }
 }
