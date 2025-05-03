@@ -4,9 +4,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Cấu hình Bean ở đây -->
-    <bean id="bookRepo" class="dangminhphuc.dev.demo.BookRepo"/>
-    <bean id="bookService" class="dangminhphuc.dev.demo.BookService">
+    <bean id="book" class="dangminhphuc.dev.demo.xml.Book">
+        <constructor-arg value="This is title"/>
+        <constructor-arg value="This is author"/>
+    </bean>
+
+    <!-- Setter-based DI -->
+    <bean id="bookRepo" class="dangminhphuc.dev.demo.xml.BookRepo">
+        <property name="books" ref="book"/>
+    </bean>
+
+    <!-- Constructor-based DI -->
+    <bean id="bookService" class="dangminhphuc.dev.demo.xml.BookService">
         <constructor-arg name="bookRepo" ref="bookRepo"/>
     </bean>
 

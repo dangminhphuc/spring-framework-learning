@@ -1,4 +1,4 @@
-package dangminhphuc.dev.demo;
+package dangminhphuc.dev.demo.xml;
 
 public class BookService {
     private BookRepo bookRepo;

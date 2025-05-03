@@ -1,13 +1,17 @@
-package dangminhphuc.dev.demo;
+package dangminhphuc.dev.demo.xml;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookRepo {
-    private final List<Book> books;
+    private List<Book> books;
 
     public BookRepo() {
         this.books = new ArrayList<>();
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     public void addBook(Book book) {

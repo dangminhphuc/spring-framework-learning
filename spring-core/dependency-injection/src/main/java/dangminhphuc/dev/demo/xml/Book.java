@@ -1,4 +1,4 @@
-package dangminhphuc.dev.demo;
+package dangminhphuc.dev.demo.xml;
 
 public class Book {
     private final String title;
