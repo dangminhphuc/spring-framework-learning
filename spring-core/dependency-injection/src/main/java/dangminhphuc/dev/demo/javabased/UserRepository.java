@@ -2,7 +2,6 @@ package dangminhphuc.dev.demo.javabased;
 
 import java.util.List;
 
-//@Repository
 public class UserRepository {
     private final List<User> users;
 
