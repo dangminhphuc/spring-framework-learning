@@ -1,4 +1,4 @@
-package dangminhphuc.dev.demo.annotation;
+package dangminhphuc.dev.demo.javabased;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package dangminhphuc.dev.demo.annotation;
+package dangminhphuc.dev.demo.javabased;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

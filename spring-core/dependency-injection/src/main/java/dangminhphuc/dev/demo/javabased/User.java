@@ -1,4 +1,4 @@
-package dangminhphuc.dev.demo.annotation;
+package dangminhphuc.dev.demo.javabased;
 
 public class User {
     private final String name;
