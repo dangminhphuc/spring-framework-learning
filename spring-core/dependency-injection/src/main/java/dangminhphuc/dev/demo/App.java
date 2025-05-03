@@ -1,8 +1,8 @@
 package dangminhphuc.dev.demo;
 
-import dangminhphuc.dev.demo.annotation.AnnotationConfig;
-import dangminhphuc.dev.demo.annotation.User;
-import dangminhphuc.dev.demo.annotation.UserService;
+import dangminhphuc.dev.demo.javabased.AnnotationConfig;
+import dangminhphuc.dev.demo.javabased.User;
+import dangminhphuc.dev.demo.javabased.UserService;
 import dangminhphuc.dev.demo.xml.Book;
 import dangminhphuc.dev.demo.xml.BookService;
 import org.springframework.context.ApplicationContext;
