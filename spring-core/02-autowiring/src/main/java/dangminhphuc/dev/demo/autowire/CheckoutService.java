@@ -13,6 +13,7 @@ public class CheckoutService {
     private PaymentProcessor paymentProcessor;
 
     @Autowired
+    // Get all PaymentProcessor beans
     private List<PaymentProcessor> paymentProcessors;
 
     public void checkout(double amount) {
