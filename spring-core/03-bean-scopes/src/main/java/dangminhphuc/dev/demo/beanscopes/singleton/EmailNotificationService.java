@@ -1,4 +1,6 @@
-package dangminhphuc.dev.demo.beanscopes;
+package dangminhphuc.dev.demo.beanscopes.singleton;
+
+import dangminhphuc.dev.demo.beanscopes.NotificationService;
 
 public class EmailNotificationService implements NotificationService {
     @Override

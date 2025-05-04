@@ -1,4 +1,6 @@
-package dangminhphuc.dev.demo.beanscopes;
+package dangminhphuc.dev.demo.beanscopes.prototype;
+
+import dangminhphuc.dev.demo.beanscopes.NotificationService;
 
 public class TelegramNotificationService implements NotificationService {
     @Override
