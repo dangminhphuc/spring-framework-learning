@@ -15,6 +15,7 @@
     <modules>
         <module>dependency-injection</module>
         <module>02-autowiring</module>
+        <module>03-bean-scopes</module>
     </modules>
 
     <properties>
