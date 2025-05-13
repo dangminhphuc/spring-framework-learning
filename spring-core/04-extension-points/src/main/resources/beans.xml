@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean class="dangminhphuc.dev.demo.extensionpoints.beanpostprocessor.ServiceNameCustomize"/>
+
+    <bean id="emailService" class="dangminhphuc.dev.demo.extensionpoints.beanpostprocessor.EmailService"/>
+    <bean id="reportService" class="dangminhphuc.dev.demo.extensionpoints.beanpostprocessor.ReportService"/>
+    <bean id="notificationService" class="dangminhphuc.dev.demo.extensionpoints.beanpostprocessor.NotificationService"/>
+
+</beans>
