@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- config bean autowire by constructor -->
+    <bean id="company" class="com.dangminhphuc.dev.configuration.xml.core.Company"
+          init-method="init"
+          destroy-method="destroy">
+        <property name="name" value="DMP Corp"/>
+    </bean>
+
+</beans>

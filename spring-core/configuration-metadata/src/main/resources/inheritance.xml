@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="base" class="com.dangminhphuc.dev.configuration.xml.core.Base" abstract="true">
+        <property name="name" value="Paul"/>
+    </bean>
+
+    <bean id="department02" class="com.dangminhphuc.dev.configuration.xml.core.Department">
+        <property name="name" value="Business Unit"/>
+    </bean>
+
+    <!-- config bean autowire by type -->
+    <bean id="employee" class="com.dangminhphuc.dev.configuration.xml.core.Employee" autowire="byType" parent="base">
+        <!--        <property name="name" value="Paul"/>-->
+        <property name="position">
+            <bean class="com.dangminhphuc.dev.configuration.xml.core.Position">
+                <property name="title" value="CTO"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- config bean autowire by constructor -->
+    <bean id="company" class="com.dangminhphuc.dev.configuration.xml.core.Company">
+        <property name="name" value="DMP Corp"/>
+        <property name="employee" ref="employee"/>
+    </bean>
+
+</beans>
