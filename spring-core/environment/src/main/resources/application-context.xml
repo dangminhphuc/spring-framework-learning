@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Active scan beans in the package -->
+    <context:component-scan base-package="com.dangminhphuc.dev.resource"/>
+
+    <!-- get config profile by ${spring.profiles.active} -->
+    <context:property-placeholder location="classpath:${spring.profiles.active}.properties"/>
+
+    <bean id="configLoader" class="com.dangminhphuc.dev.resource.ConfigLoader"/>
+</beans>
