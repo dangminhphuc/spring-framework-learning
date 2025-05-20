@@ -10,8 +10,8 @@
     <!-- Active scan beans in the package -->
     <context:component-scan base-package="com.dangminhphuc.dev.resource"/>
 
-    <!-- config profile, by default, the default property is active when without property specified -->
-    <context:property-placeholder location="classpath:default.properties, classpath:${spring.profiles.active}.properties"/>
+    <!-- get config profile by ${spring.profiles.active} -->
+    <context:property-placeholder location="classpath:${spring.profiles.active}.properties"/>
 
     <bean id="configLoader" class="com.dangminhphuc.dev.resource.ConfigLoader"/>
 </beans>

@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ResourceTest {
+public class ResourceXMLConfigurationTest {
 
     @BeforeEach
     public void beforeExecute() {
@@ -32,14 +32,5 @@ public class ResourceTest {
         ConfigLoader configLoader = context.getBean("configLoader", ConfigLoader.class);
         assertEquals("prod@email.com", configLoader.getUsername());
         assertEquals("@!((%))", configLoader.getPassword());
-    }
-
-    @Test
-    public void testDefaultResource() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-
-        ConfigLoader configLoader = context.getBean("configLoader", ConfigLoader.class);
-        assertEquals("default", configLoader.getUsername());
-        assertEquals("default", configLoader.getPassword());
     }
 }
