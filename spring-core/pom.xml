@@ -24,6 +24,7 @@
         <module>extension-points</module>
         <module>environment</module>
         <module>i18n</module>
+        <module>application-event</module>
     </modules>
 
     <dependencies>
