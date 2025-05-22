@@ -23,6 +23,7 @@
 <!--        <module>bean-scopes</module>-->
         <module>extension-points</module>
         <module>environment</module>
+        <module>i18n</module>
     </modules>
 
     <dependencies>
