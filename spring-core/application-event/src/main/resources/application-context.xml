@@ -1,0 +1,19 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Listener -->
+    <bean id="helloListener" class="com.dangminhphuc.dev.event.HelloListener"/>
+
+    <!-- Publisher -->
+    <bean id="helloPublisher" class="com.dangminhphuc.dev.event.HelloPublisher" autowire="byType">
+<!--                <property name="applicationEventPublisher" ref="applicationEventMulticaster"/>-->
+    </bean>
+
+    <!-- Event Multicaster -->
+    <bean id="applicationEventMulticaster"
+          class="org.springframework.context.event.SimpleApplicationEventMulticaster"/>
+
+</beans>
