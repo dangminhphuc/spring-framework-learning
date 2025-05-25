@@ -4,10 +4,10 @@ import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
 @Getter
-public class HelloEvent extends ApplicationEvent {
+public class EventCustomize2nd extends ApplicationEvent {
     private final String message;
 
-    public HelloEvent(Object source, String message) {
+    public EventCustomize2nd(Object source, String message) {
         super(source);
         this.message = message;
     }

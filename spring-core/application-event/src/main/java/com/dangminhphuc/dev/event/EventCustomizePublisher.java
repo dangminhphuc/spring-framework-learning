@@ -4,15 +4,14 @@ import lombok.Setter;
 import org.springframework.context.ApplicationEventPublisher;
 
 @Setter
-public class HelloPublisher {
+public class EventCustomizePublisher {
     private ApplicationEventPublisher publisher;
 
-    public HelloPublisher() {
+    public EventCustomizePublisher() {
     }
 
     public void sayHello() {
-        System.out.println("HelloPublisher");
-        HelloEvent event = new HelloEvent(this, "Hello World");
+        EventCustomize1st event = new EventCustomize1st(this, "Hello World");
         this.publisher.publishEvent(event);
     }
 }
