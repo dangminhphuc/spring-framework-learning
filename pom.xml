@@ -8,6 +8,7 @@
 
     <modules>
         <module>spring-core</module>
+        <module>logger</module>
     </modules>
 
     <dependencies>
