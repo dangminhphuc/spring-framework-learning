@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- id, class -->
+    <bean id="singletonBean" class="com.dangminhphuc.dev.beans.advance.xml.SimpleBean"/>
+
+    <!-- id, class, scope -->
+    <bean id="prototypeBean" class="com.dangminhphuc.dev.beans.advance.xml.SimpleBean" scope="prototype"/>
+
+    <!-- constructor-arg by index -->
+    <bean id="constructorArgsIndexBean" class="com.dangminhphuc.dev.beans.advance.xml.ConstructorBean">
+        <constructor-arg index="0" value="Args Index"/>
+        <constructor-arg index="1" ref="singletonBean"/>
+    </bean>
+
+    <!-- constructor-arg by name -->
+    <bean id="constructorArgsNameBean" class="com.dangminhphuc.dev.beans.advance.xml.ConstructorBean">
+        <constructor-arg name="property" value="Args Name"/>
+        <constructor-arg name="simpleBean" ref="singletonBean"/>
+    </bean>
+
+    <!-- property -->
+    <bean id="propertyBean" class="com.dangminhphuc.dev.beans.advance.xml.PropertyBean">
+        <property name="val" value="95"/>
+        <property name="simpleBean" ref="singletonBean"/>
+    </bean>
+
+    <!-- init/destroy method -->
+    <bean id="lifecycleBean"
+          class="com.dangminhphuc.dev.beans.advance.xml.LifeCycleBean"
+          init-method="onInit"
+          destroy-method="onDestroy"/>
+
+    <!-- autowire -->
+    <bean id="autowireByNameBean" class="com.dangminhphuc.dev.beans.advance.xml.AutowireBean" autowire="byName"/>
+    <bean id="autowireByTypeBean" class="com.dangminhphuc.dev.beans.advance.xml.AutowireBean" autowire="byType"/>
+    <bean id="autowireConstructorBean" class="com.dangminhphuc.dev.beans.advance.xml.AutowireBean"
+          autowire="constructor"/>
+
+    <!-- depends-on -->
+    <bean id="1stBean" class="com.dangminhphuc.dev.beans.advance.xml.DependsOnBean">
+        <constructor-arg name="message" value="1st bean"/>
+    </bean>
+    <bean id="2ndBean" class="com.dangminhphuc.dev.beans.advance.xml.DependsOnBean" depends-on="1stBean">
+        <constructor-arg name="message" value="2nd bean"/>
+    </bean>
+
+    <!-- lazy init -->
+    <bean id="lazyInit" class="com.dangminhphuc.dev.beans.advance.xml.SimpleBean" lazy-init="true"/>
+
+    <!-- primary / qualifier (via XML qualifiers) -->
+    <bean id="qualifiedPrimaryBean" class="com.dangminhphuc.dev.beans.advance.xml.QualifiedBean">
+        <qualifier type="primary"/>
+        <property name="id" value="primary"/>
+    </bean>
+    <bean id="qual02" class="com.dangminhphuc.dev.beans.advance.xml.QualifiedBean"/>
+
+</beans>
