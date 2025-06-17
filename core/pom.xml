@@ -14,7 +14,6 @@
 
     <modules>
         <module>ioc-container</module>
-        <module>validation-data-binding-type-conversion</module>
     </modules>
 
     <dependencies>
