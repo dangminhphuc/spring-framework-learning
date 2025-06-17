@@ -5,17 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.dangminhphuc.dev</groupId>
-        <artifactId>core</artifactId>
+        <artifactId>validation-data-binding-type-conversion</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <name>Validation, Data Binding and Type Conversion</name>
-    <artifactId>validation-data-binding-type-conversion</artifactId>
-    <version>1.0.0</version>
-    <packaging>pom</packaging>
+    <name>Validation</name>
+    <artifactId>validation</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>validation</module>
-    </modules>
 
 </project>
