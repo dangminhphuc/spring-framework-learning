@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <name>i18n</name>
+    <name>Internationalization</name>
     <artifactId>i18n</artifactId>
     <packaging>jar</packaging>
 
