@@ -16,6 +16,21 @@
 
     <modules>
         <module>validation</module>
+        <module>data-binding</module>
     </modules>
+
+    <dependencies>
+        <!-- Spring Beans (important for MutablePropertyValues, etc.) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+
+        <!-- Spring Validation (for DataBinder + LocalValidatorFactoryBean) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
