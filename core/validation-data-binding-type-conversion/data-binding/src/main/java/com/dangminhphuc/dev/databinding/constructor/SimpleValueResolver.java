@@ -1,4 +1,4 @@
-package com.dangminhphuc.dev.databinding;
+package com.dangminhphuc.dev.databinding.constructor;
 
 import org.springframework.validation.DataBinder;
 
@@ -14,8 +14,8 @@ public class SimpleValueResolver implements DataBinder.ValueResolver {
 
     @Override
     public Object resolveValue(String name, Class<?> type) {
-        if (name.equals("textCustomized")) {
-            return this.input.get("text_2nd");
+        if (name.equals("string2nd")) {
+            return this.input.get("stringCustomized");
         }
         return this.input.get(name);
     }
