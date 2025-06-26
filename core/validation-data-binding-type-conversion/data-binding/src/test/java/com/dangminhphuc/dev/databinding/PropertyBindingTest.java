@@ -6,10 +6,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.NotWritablePropertyException;
+import org.springframework.beans.TypeMismatchException;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PropertyBindingTest {
     private Bar object;
@@ -94,5 +97,31 @@ public class PropertyBindingTest {
         // Verify using getPropertyValue
         assertEquals("value1", wrapper.getPropertyValue("map['key1']"), "Map should contain key1 with value 'value1'");
         assertEquals("value2", wrapper.getPropertyValue("map['key2']"), "Map should contain key1 with value 'value2'");
+    }
+
+    @Test
+    @DisplayName("Set invalid property type with BeanWrapper")
+    public void propertyBinding_whenSetInvalidProperty_thenThrowTypeMismatchException() {
+        Bar bar = new Bar();
+        BeanWrapper wrapper = new BeanWrapperImpl(bar);
+
+        assertThrows(
+                TypeMismatchException.class,
+                () -> wrapper.setPropertyValue("number", "stringValue"),
+                "Should throw TypeMismatchException for invalid property type"
+        );
+    }
+
+    @Test
+    @DisplayName("Set non-existent property with BeanWrapper")
+    public void propertyBinding_whenSetWrongPropertyName_thenThrowBeansException() {
+        Bar bar = new Bar();
+        BeanWrapper wrapper = new BeanWrapperImpl(bar);
+
+        assertThrows(
+                NotWritablePropertyException.class,
+                () -> wrapper.setPropertyValue("nonExistentProperty", "value"),
+                "Should throw NotWritablePropertyException for non-existent property"
+        );
     }
 }
