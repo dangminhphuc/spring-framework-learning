@@ -17,6 +17,7 @@
     <modules>
         <module>validation</module>
         <module>data-binding</module>
+        <module>type-conversion</module>
     </modules>
 
     <dependencies>
