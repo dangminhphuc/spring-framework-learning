@@ -1,4 +1,4 @@
-package com.dangminhphuc.dev.typeconversion;
+package com.dangminhphuc.dev.typeconversion.converter;
 
 import org.springframework.core.convert.converter.Converter;
 

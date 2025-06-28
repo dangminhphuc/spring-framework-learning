@@ -1,5 +1,6 @@
 package com.dangminhphuc.dev.typeconversion;
 
+import com.dangminhphuc.dev.typeconversion.convertfactory.StringToNumberConverterFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.convert.ConversionFailedException;
