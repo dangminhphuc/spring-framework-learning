@@ -1,7 +1,6 @@
 package com.dangminhphuc.dev.databinding;
 
-import com.dangminhphuc.dev.databinding.constructor.Bar;
-import com.dangminhphuc.dev.databinding.constructor.SimpleValueResolver;
+import com.dangminhphuc.dev.ConstructorBindingObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.ResolvableType;
@@ -21,47 +20,47 @@ public class ConstructorBindingTest {
      * 2. Set targetType to the target class. <br/>
      * 3. Call construct.
      */
-    public static DataBinder dataBinder(Map<String, ?> input) {
+    private static DataBinder getBinder(Map<String, ?> input) {
         DataBinder binder = new DataBinder(null);
-        binder.setTargetType(ResolvableType.forClass(Bar.class));
+        binder.setTargetType(ResolvableType.forClass(ConstructorBindingObject.class));
         binder.construct(new SimpleValueResolver(input));
         return binder;
     }
 
     @Test
     @DisplayName("Should return Object when input valid")
-    public void construct_whenInputValid_thenReturnObject() {
+    public void construct_whenInputValid_thenReturnObject() throws Exception {
         Map<String, ?> input = Map.of(
                 "number", 1,
-                "string", "Text",
-                "stringCustomized", "Text resolved",
+                "text", "Text",
+                "text_2nd", "Text resolved",
                 "list[0]", "Element 1st",
                 "list[1]", "Element 2nd",
                 "map[number]", "Number",
                 "map[string]", "String",
-                "foo.id", "F1"
+                "item.id", "1"
         );
 
-        DataBinder binder = dataBinder(input);
-        BindingResult br = binder.getBindingResult();
+        DataBinder binder = getBinder(input);
+        BindingResult bindingResult = binder.getBindingResult();
 
-        Bar target = (Bar) br.getTarget();
-        System.out.println("Constructed object: " + target);
+        ConstructorBindingObject construct = (ConstructorBindingObject) bindingResult.getTarget();
 
-        assertNotNull(target);
-        assertEquals(1, target.getNumber());
-        assertEquals("Text", target.getString());
-        assertEquals("Text resolved", target.getString2nd());
+        assertNotNull(construct);
+        assertEquals(1, construct.getNumber());
+        assertEquals("Text", construct.getText());
+        assertEquals("Text resolved", construct.getTextCustomized());
 
-        assertFalse(target.getList().isEmpty());
-        assertEquals("Element 1st", target.getList().get(0));
-        assertEquals("Element 2nd", target.getList().get(1));
+        assertFalse(construct.getList().isEmpty());
+        assertEquals("Element 1st", construct.getList().get(0));
+        assertEquals("Element 2nd", construct.getList().get(1));
 
-        assertEquals("Number", target.getMap().get("number"));
-        assertEquals("String", target.getMap().get("string"));
 
-        assertNotNull(target.getFoo());
-        assertEquals("F1", target.getFoo().getId());
+        assertEquals("Number", construct.getMap().get("number"));
+        assertEquals("String", construct.getMap().get("string"));
+
+        assertNotNull(construct.getItem());
+        assertEquals("1", construct.getItem().getId());
     }
 
     @Test
@@ -71,7 +70,7 @@ public class ConstructorBindingTest {
                 "number", "One"
         );
 
-        DataBinder binder = dataBinder(input);
+        DataBinder binder = getBinder(input);
         BindingResult bindingResult = binder.getBindingResult();
         List<ObjectError> errors = bindingResult.getAllErrors();
 
