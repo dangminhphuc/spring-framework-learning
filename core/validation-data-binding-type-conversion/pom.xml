@@ -18,6 +18,7 @@
         <module>validation</module>
         <module>data-binding</module>
         <module>type-conversion</module>
+        <module>java-bean-validation</module>
     </modules>
 
     <dependencies>
