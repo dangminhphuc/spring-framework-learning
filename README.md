@@ -18,8 +18,8 @@ broken down into smaller, focused submodules.
 ```markdown
 spring-framework/
 ├── pom.xml                         
-├── [spring-core](./core)/                    
-│ ├── [ioc-container](./core/ioc-container)/              
+├── spring-core/              
+│ ├── ioc-container/        
 │ └── README.md
 └── README.md
 ```

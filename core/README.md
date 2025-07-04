@@ -1,4 +1,4 @@
-# spring-core
+# Core Technologies of the Spring Framework
 
 > Core technologies of the Spring Framework — the foundation for all other modules.
 
@@ -14,27 +14,9 @@ Spring Boot and Spring Data work under the hood.
 
 ---
 
-## Structure
-
-```
-spring-core/
-├── pom.xml
-├── ioc-container/              # Inversion of Control / Dependency Injection
-├── resources/                  # Resource abstraction (classpath, URL, file, etc.)
-├── validation-conversion/      # Validation, data binding, type conversion
-├── spel/                       # Spring Expression Language
-├── aop-basics/                 # Basic AOP concepts
-├── aop-apis/                   # Spring AOP APIs
-├── null-safety/                # Null-safe APIs and annotations
-├── data-buffers-codecs/        # Reactive data buffers and codecs
-├── logging/                    # Logging abstraction and configuration
-├── aot/                        # Ahead-of-time optimizations (Spring 6+)
-└── README.md
-```
-
 ---
 
-## Core Features
+## Core Concepts
 
 | Feature                     | Description                                                                       |
 |-----------------------------|-----------------------------------------------------------------------------------|
