@@ -15,19 +15,13 @@ broken down into smaller, focused submodules.
 
 ## Structure
 
-```
-spring-learning/
-├── pom.xml                         # Root Maven POM
-├── spring-core/                    # Core module
-│   ├── ioc-container/              # Feature: IoC Container
-│   ├── ...                         # Feature: ... (other features)
-│   └── README.md
-├── spring-boot/                   # Spring Boot module
-│   ├── ...
-│   └── ...
-│   └── README.md
-├── ...                            # Other Spring modules
-└── README.md                      # Root README (this file)
+```markdown
+spring-framework/
+├── pom.xml                         
+├── [spring-core](./core)/                    
+│ ├── [ioc-container](./core/ioc-container)/              
+│ └── README.md
+└── README.md
 ```
 
 ---
@@ -65,7 +59,7 @@ From root directory:
 mvn clean test
 
 # Run tests for a specific module
-cd spring-core/core-conversion
+cd $path
 mvn test
 ```
 
