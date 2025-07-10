@@ -6,35 +6,52 @@
 
 ## Overview
 
-This module contains essential infrastructure features of the Spring Framework. These features provide the foundation
-for dependency injection, resource loading, type conversion, expression parsing, AOP, and more.
+This module introduces the core technologies of the Spring Framework — the essential building blocks that enable
+dependency injection, aspect-oriented programming, expression evaluation, resource abstraction, and more. These
+components provide the foundation for building modern, modular, and maintainable Spring applications.
 
-Spring Core is the heart of the framework, and learning it deeply helps you understand how higher-level modules like
-Spring Boot and Spring Data work under the hood.
+Key features included in this module:
 
----
+- IoC Container
+  Central to Spring, the Inversion of Control container manages object creation, configuration, and dependency
+  injection.
 
----
+- Resources
+  A consistent abstraction for accessing files and other external resources across different environments (classpath,
+  filesystem, URLs, etc.).
 
-## Core Concepts
+- Validation & Conversion
+  Type conversion and validation infrastructure for binding, form processing, and data transformation.
 
-| Feature                     | Description                                                                       |
-|-----------------------------|-----------------------------------------------------------------------------------|
-| **IoC Container**           | Dependency injection and bean lifecycle management                                |
-| **Resources**               | Unified API for accessing classpath, URL, file resources                          |
-| **Validation & Conversion** | Data binding, validation, type conversion via `PropertyEditor`, `Converter`, etc. |
-| **SpEL**                    | Dynamic expression language for manipulating object graphs                        |
-| **AOP Basics**              | Cross-cutting concerns via proxies and method interception                        |
-| **Spring AOP APIs**         | Programmatic and declarative support for AOP with annotations or XML              |
-| **Null-safety**             | Support for `@NonNull`, `@Nullable` and null contract annotations                 |
-| **Data Buffers & Codecs**   | Reactive abstractions for buffer and encoding/decoding (WebFlux support)          |
-| **Logging**                 | Commons Logging bridge with support for Log4j, SLF4J, etc.                        |
-| **AOT**                     | Support for GraalVM native images via ahead-of-time optimizations                 |
+- Spring Expression Language (SpEL)
+  A powerful expression language used to dynamically access, query, and manipulate object graphs at runtime.
+
+- AOP Basics
+  Core support for aspect-oriented programming to separate cross-cutting concerns such as logging, security, and
+  transactions.
+
+- Spring AOP API
+  Programmatic and annotation-based APIs for defining and applying aspects. Integrates seamlessly with AspectJ for
+  advanced scenarios.
+
+- Null-safety
+  Support for @Nullable and @NonNull annotations across the framework to aid static analysis and improve code safety.
+
+- Data Buffers & Codecs
+  Infrastructure for efficient I/O handling in reactive and non-blocking contexts, commonly used in WebFlux and
+  messaging.
+
+- Logging
+  Unified logging abstraction built on SLF4J, allowing consistent logging behavior with pluggable backends.
+
+- Ahead-of-Time (AOT) Processing
+  Build-time processing for optimizing Spring applications, especially for native image generation with GraalVM.
+
+These technologies form the backbone of Spring and are essential for both traditional applications and modern
+cloud-native microservices.
 
 ---
 
 ## Related
 
 * [Spring Framework Reference - Core Technologies](https://docs.spring.io/spring-framework/reference/core.html)
-
----
