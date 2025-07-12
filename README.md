@@ -1,10 +1,10 @@
-# Spring Learning Project
+# Spring Framework Learning
 
 ---
 
 ## Overview
 
-This repository is a structured, test-centric learning path through the Spring ecosystem. Instead of using `main()`
+This repository is a structured through the Spring ecosystem. Instead of using `main()`
 methods, all features are explored using **unit tests**, ensuring isolated, verifiable, and repeatable learning
 examples.
 
@@ -17,29 +17,20 @@ broken down into smaller, focused submodules.
 
 ```markdown
 spring-framework/
-├── pom.xml                         
 ├── spring-core/              
-│ ├── ioc-container/        
-│ └── README.md
-└── README.md
+│ ├── ioc-container/
+│ ├── validation-data-binding-type-conversion/
+│ └── ...
+└── ...
 ```
-
----
-
-## Goals
-
-* Deepen understanding of core Spring modules through real examples
-* Learn by writing expressive, focused unit tests
-* Avoid using `main()` — embrace testing as the entry point
-* Structure everything into a maintainable multi modules Maven project
 
 ---
 
 ## Environment
 
 * Java 17+
-* Maven 3.9+
-* JUnit 5
+* Maven 3.13+
+* JUnit 5.11+
 * IDE: IntelliJ IDEA (recommended)
 
 Optional:
@@ -64,7 +55,3 @@ mvn test
 ```
 
 Or run directly in IntelliJ via the test class runner.
-
----
-
-Ready to explore Spring the smart way. Let's go!
