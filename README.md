@@ -55,23 +55,3 @@ mvn test
 ```
 
 Or run directly in IntelliJ via the test class runner.
-
-## Released
-
-|             |               |                                         | Status |
-|-------------|---------------|-----------------------------------------|--------|
-| Spring Core |               |                                         |        |
-|             | IoC Container |                                         |        |
-|             |               | Introduction to IoC and Beans           |        |
-|             |               | Container Overview                      |        | 
-|             |               | Bean Definitions & Dependencies         |        |
-|             |               | Bean Customization                      |        |
-|             |               | Container Extension Points              |        |
-|             |               | Annotation-Based Configuration          |        |
-|             |               | Classpath Scanning                      |        |
-|             |               | JSR-330 Support                         |        |
-|             |               | Java-based Configuration                |        |
-|             |               | Environment Abstraction                 |        |
-|             |               | Load-Time Weaving                       |        |
-|             |               | Advanced Features of ApplicationContext |        |
-|             |               | BeanFactory API                         |        |
