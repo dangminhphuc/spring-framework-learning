@@ -204,4 +204,9 @@ public class EvaluationContextTest {
         }
 
     }
+
+    @Nested
+    @DisplayName("StandardEvaluationContext Tests")
+    class StandardEvaluationContextTest {
+    }
 }
