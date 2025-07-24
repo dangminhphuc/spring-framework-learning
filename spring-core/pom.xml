@@ -15,6 +15,7 @@
     <modules>
         <module>ioc-container</module>
         <module>validation-data-binding-type-conversion</module>
+        <module>spel</module>
     </modules>
 
     <dependencies>
