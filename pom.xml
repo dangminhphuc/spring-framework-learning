@@ -9,6 +9,7 @@
 
     <modules>
         <module>spring-core</module>
+        <module>model-example</module>
     </modules>
 
     <properties>
