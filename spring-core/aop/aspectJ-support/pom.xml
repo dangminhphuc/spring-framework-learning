@@ -5,16 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.dangminhphuc.dev</groupId>
-        <artifactId>spring-core</artifactId>
+        <artifactId>aop</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <name>Aspect Oriented Programming</name>
-    <artifactId>aop</artifactId>
-    <packaging>pom</packaging>
+    <name>AspectJ Support</name>
+    <artifactId>aspectJ-support</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>aspectJ-support</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.21</version>
+        </dependency>
+    </dependencies>
 
 </project>

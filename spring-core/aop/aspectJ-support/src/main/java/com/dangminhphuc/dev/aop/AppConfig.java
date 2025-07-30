@@ -1,0 +1,11 @@
+package com.dangminhphuc.dev.aop;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+@Configuration
+@EnableAspectJAutoProxy
+@ComponentScan(basePackages = "com.dangminhphuc.dev.aop")
+public class AppConfig {
+}
