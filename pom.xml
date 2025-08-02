@@ -23,10 +23,10 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- POJO -->
             <dependency>
-                <groupId>jakarta.annotation</groupId>
-                <artifactId>jakarta.annotation-api</artifactId>
-                <version>2.1.1</version>
+                <groupId>com.dangminhphuc.dev</groupId>
+                <artifactId>model-example</artifactId>
             </dependency>
 
             <!-- Spring -->
@@ -110,6 +110,13 @@
                 <artifactId>jakarta.validation-api</artifactId>
                 <version>3.1.0</version>
             </dependency>
+            <!-- Jakarta Annotations API (required for Jakarta Validation) -->
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>2.1.1</version>
+            </dependency>
+
             <!-- Hibernate Validator (as the implementation of Jakarta Validation) -->
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
