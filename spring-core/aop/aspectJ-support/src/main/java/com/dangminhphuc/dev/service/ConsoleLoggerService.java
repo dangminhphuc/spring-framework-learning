@@ -1,4 +1,4 @@
-package com.dangminhphuc.dev.aop;
+package com.dangminhphuc.dev.service;
 
 import org.springframework.stereotype.Component;
 
@@ -9,8 +9,4 @@ public class ConsoleLoggerService implements LoggerService {
         System.out.println(message);
     }
 
-    @Override
-    public void abort(String message) {
-
-    }
 }

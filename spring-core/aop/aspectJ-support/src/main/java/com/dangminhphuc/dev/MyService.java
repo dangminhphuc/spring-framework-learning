@@ -1,4 +1,4 @@
-package com.dangminhphuc.dev.aop;
+package com.dangminhphuc.dev;
 
 import org.springframework.stereotype.Service;
 

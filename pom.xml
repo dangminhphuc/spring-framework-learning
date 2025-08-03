@@ -127,11 +127,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>com.dangminhphuc.dev</groupId>
-            <artifactId>model-example</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+        
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
