@@ -15,6 +15,7 @@
 
     <modules>
         <module>aspectj-support</module>
+        <module>aop-api</module>
     </modules>
 
 </project>
