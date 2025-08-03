@@ -5,12 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.dangminhphuc.dev</groupId>
-        <artifactId>spring-framework-learning</artifactId>
+        <artifactId>spring-core</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <name>Model Examples</name>
-    <artifactId>model-example</artifactId>
-    <packaging>jar</packaging>
+    <name>Aspect Oriented Programming</name>
+    <artifactId>aop</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>aspectj-support</module>
+    </modules>
 
 </project>

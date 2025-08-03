@@ -16,6 +16,7 @@
         <module>ioc-container</module>
         <module>validation-data-binding-type-conversion</module>
         <module>spel</module>
+        <module>aop</module>
     </modules>
 
     <dependencies>
@@ -30,6 +31,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
         </dependency>
     </dependencies>
 </project>
