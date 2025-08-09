@@ -13,4 +13,14 @@
     <artifactId>data-access</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>transaction-management</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+    </dependencies>
 </project>
