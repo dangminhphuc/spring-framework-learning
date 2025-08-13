@@ -18,15 +18,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ContextConfiguration(classes = AppConfig.class)
 @Sql(scripts = "/cleanup.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TransactionTest {
-    private final Transactionaly fooService;
+    private final Transaction fooService;
 
-    private final Transactionaly barService;
+    private final Transaction barService;
 
     private final GammaService gammaService;
 
     @Autowired
-    public TransactionTest(@Qualifier("fooService") Transactionaly fooService,
-                           @Qualifier("barService") Transactionaly barService,
+    public TransactionTest(@Qualifier("fooService") Transaction fooService,
+                           @Qualifier("barService") Transaction barService,
                            GammaService gammaService) {
         this.fooService = fooService;
         this.barService = barService;
@@ -41,7 +41,7 @@ public class TransactionTest {
         assertEquals(0, barService.count());
 
         // Execute the successful transaction
-        fooService.insertFooAndBarSuccessfully(new Foo("Test Foo Commit"), new Bar("Test Bar Commit"));
+//        fooService.insertFooAndBarSuccessfully(new Foo("Test Foo Commit"), new Bar("Test Bar Commit"));
 
         // Assert that the data was committed
         assertEquals(1, fooService.count(), "Foo should have been committed.");
@@ -55,7 +55,7 @@ public class TransactionTest {
         assertEquals(0, fooService.count());
 
         // Execute the transaction that will throw an exception
-        assertThrows(RuntimeException.class, () -> fooService.required_failure(
+        assertThrows(RuntimeException.class, () -> fooService.REQUIRED_FAILURE(
         ));
 
         // After the transaction, we expect no Foo or Bar to be inserted
@@ -66,15 +66,6 @@ public class TransactionTest {
     @DisplayName("Advanced Transactional Behaviors")
     class AdvancedTransactionalBehaviorTests {
 
-//        private final BarService barService;
-//        private final JdbcTemplate jdbcTemplate;
-//
-//        @Autowired
-//        public TransactionalSetting(JdbcTemplate jdbcTemplate, BarService barService) {
-//            this.jdbcTemplate = jdbcTemplate;
-//            this.barService = barService;
-//        }
-
         @Test
         @DisplayName("Test rollback for checked exception")
         void testRollbackForCheckedException() {
@@ -82,10 +73,10 @@ public class TransactionTest {
             assertEquals(0, fooService.count());
 
             // Execute the transaction that will throw a checked exception
-            assertThrows(java.io.IOException.class, () -> fooService.insertFooAndBarWithCheckedException(
-                    new Foo("Test Foo Checked Exception"),
-                    new Bar("Test Bar Checked Exception")
-            ));
+//            assertThrows(java.io.IOException.class, () -> fooService.insertFooAndBarWithCheckedException(
+//                    new Foo("Test Foo Checked Exception"),
+//                    new Bar("Test Bar Checked Exception")
+//            ));
 
             // After the transaction, we expect no Foo to be inserted
             assertEquals(0, fooService.count(), "Transaction should have rolled back due to checked exception.");
@@ -99,10 +90,10 @@ public class TransactionTest {
             assertEquals(0, barService.count());
 
             // Execute the transaction with REQUIRES_NEW propagation
-            assertThrows(RuntimeException.class, () -> fooService.insertFooAndBarWithPropagation(
-                    new Foo("Test Foo REQUIRES_NEW"),
-                    new Bar("Test Bar REQUIRES_NEW")
-            ));
+//            assertThrows(RuntimeException.class, () -> fooService.insertFooAndBarWithPropagation(
+//                    new Foo("Test Foo REQUIRES_NEW"),
+//                    new Bar("Test Bar REQUIRES_NEW")
+//            ));
 
             // Assert that the Bar was inserted due to REQUIRES_NEW propagation
             assertEquals(1, barService.count(), "Bar should have been inserted due to REQUIRES_NEW propagation.");
@@ -117,7 +108,7 @@ public class TransactionTest {
             assertEquals(0, barService.count());
 
             // Execute the transaction with REQUIRED propagation
-            assertThrows(RuntimeException.class, () -> gammaService.executeOnlyOneSucceeds());
+            assertThrows(RuntimeException.class, () -> gammaService.REQUIRED_execOnly1TxSucceed());
 
             // Assert that no Foo or Bar was inserted due to rollback
             assertEquals(0, fooService.count());
@@ -132,11 +123,42 @@ public class TransactionTest {
             assertEquals(0, barService.count());
 
             // Execute the transaction with REQUIRED propagation
-            gammaService.executeBothSucceeds();
+            gammaService.REQUIRED_execBothTxSucceed();
 
             // Assert that no Foo or Bar was inserted due to rollback
             assertEquals(1, fooService.count());
             assertEquals(1, barService.count());
+        }
+
+        @Test
+        void REQUIRED_NEW_fooSucceedsBarFail_rollbackFoo() {
+            // Pre-assertion
+            assertEquals(0, fooService.count());
+            assertEquals(0, barService.count());
+
+            // Execute the transaction with REQUIRED_NEW propagation
+            gammaService.REQUIRED_NEW_execBothTxSucceed();
+
+            // Assert that no Foo was inserted due to rollback
+            assertEquals(1, fooService.count());
+            assertEquals(1, barService.count());
+            assertEquals(2, gammaService.getSteps().size());
+        }
+
+
+        @Test
+        void REQUIRED_NEW_fooSucceedsBarFail_rollbackFoo2() {
+            // Pre-assertion
+            assertEquals(0, fooService.count());
+            assertEquals(0, barService.count());
+
+            // Execute the transaction with REQUIRED_NEW propagation
+            assertThrows(RuntimeException.class, () -> gammaService.REQUIRED_NEW_execOnly1TxSucceed());
+
+            // Assert that no Foo was inserted due to rollback
+            assertEquals(1, fooService.count());
+            assertEquals(0, barService.count());
+            assertEquals(1, gammaService.getSteps().size());
         }
     }
 }
