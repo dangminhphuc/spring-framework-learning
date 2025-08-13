@@ -11,6 +11,7 @@
         <module>spring-core</module>
         <module>model-example</module>
         <module>data-access</module>
+        <module>data-access/transaction-management</module>
     </modules>
 
     <properties>
