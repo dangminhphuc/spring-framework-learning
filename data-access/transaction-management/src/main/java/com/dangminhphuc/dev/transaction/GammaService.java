@@ -17,6 +17,10 @@ public class GammaService {
     @Getter
     private final List<String> steps = new ArrayList<>();
 
+    public void clearSteps() {
+        this.steps.clear();
+    }
+
     @Autowired
     public GammaService(@Qualifier("fooService") Transaction fooService,
                         @Qualifier("barService") Transaction barService) {
@@ -37,7 +41,7 @@ public class GammaService {
     }
 
     @Transactional
-    public void REQUIRED_NEW_execBothTxSucceed() {
+    public void REQUIRED_NEW_BothTxSucceed() {
         this.steps.add("START");
         this.fooService.PROPAGATION_REQUIRED_NEW(true);
         this.barService.PROPAGATION_REQUIRED_NEW(true);
@@ -45,7 +49,7 @@ public class GammaService {
     }
 
     @Transactional
-    public void REQUIRED_NEW_execOnly1TxSucceed() {
+    public void REQUIRED_NEW_Only1TxSucceed() {
         this.steps.add("START");
         this.fooService.PROPAGATION_REQUIRED_NEW(true);
         this.barService.PROPAGATION_REQUIRED_NEW(false);
@@ -53,14 +57,18 @@ public class GammaService {
     }
 
     @Transactional
-    public void NESTED_execBothTxSucceed() {
-        this.fooService.PROPAGATION_REQUIRED_NEW(true);
-        this.barService.PROPAGATION_REQUIRED_NEW(true);
+    public void NESTED_bothTxSucceed() {
+        this.steps.add("START");
+        this.fooService.PROPAGATION_NESTED(true);
+        this.barService.PROPAGATION_NESTED(true);
+        this.steps.add("FINISH");
     }
 
     @Transactional
-    public void NESTED_execOnly1TxSucceed() {
-        this.fooService.PROPAGATION_REQUIRED_NEW(true);
-        this.barService.PROPAGATION_REQUIRED_NEW(false);
+    public void NESTED_only1TxSucceed() {
+        this.steps.add("START");
+        this.fooService.PROPAGATION_NESTED(true); // This is a savepoint, so it will commit
+        this.barService.PROPAGATION_NESTED(false);// If this fails, it will roll back to the savepoint
+        this.steps.add("FINISH");
     }
 }

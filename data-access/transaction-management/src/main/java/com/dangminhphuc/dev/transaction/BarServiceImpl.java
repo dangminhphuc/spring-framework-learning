@@ -1,29 +1,28 @@
 package com.dangminhphuc.dev.transaction;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service("barService")
 public class BarServiceImpl implements Transaction {
 
     private final JdbcTemplate jdbcTemplate;
-    private final List<String> instances = new ArrayList<>();
 
+    @Autowired
     public BarServiceImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public JdbcTemplate jdbcTemplate() {
-        return this.jdbcTemplate;
+    public void insert() {
+        this.jdbcTemplate.update("INSERT INTO BAR (NAME) VALUES (?)", "INSERT WITH TRANSACTION");
     }
 
     @Override
-    public String tableName() {
-        return "BAR";
+    public Integer count() {
+        Integer count = this.jdbcTemplate.queryForObject("SELECT COUNT(*) FROM BAR", Integer.class);
+        return (count == null) ? 0 : count;
     }
 
 }
