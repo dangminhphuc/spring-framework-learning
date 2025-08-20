@@ -11,6 +11,9 @@
 
     <name>Transaction Management</name>
     <artifactId>transaction-management</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
+    <modules>
+        <module>transaction-setting-isolation</module>
+    </modules>
 </project>
