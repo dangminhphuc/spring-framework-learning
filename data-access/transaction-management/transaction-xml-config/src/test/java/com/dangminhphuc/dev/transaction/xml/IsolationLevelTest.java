@@ -112,7 +112,7 @@ public class IsolationLevelTest {
         assertEquals(0, countWithReadCommitted, "READ_COMMITTED should NOT see the uncommitted order.");
 
         // Final check to ensure the writer transaction was rolled back
-        int finalCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM orders", Integer.class);
+        Integer finalCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM orders", Integer.class);
         assertEquals(0, finalCount, "The writer transaction should have been rolled back.");
 
         logger.info("Test finished. Isolation levels behaved as expected.");

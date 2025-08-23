@@ -3,6 +3,7 @@ package com.dangminhphuc.dev.transaction.xml.foobar.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import javax.sql.DataSource;
 
 public class FooServiceImpl implements FooService {
@@ -42,5 +43,11 @@ public class FooServiceImpl implements FooService {
 
         logger.info("FOO_SERVICE: Throwing exception to roll back outer transaction.");
         throw new RuntimeException("Intentional rollback for outer transaction");
+    }
+
+    @Override
+    public void updateFooName(String oldName, String newName) {
+        logger.info("FOO_SERVICE: Updating Foo name from '{}' to '{}'", oldName, newName);
+        jdbcTemplate.update("UPDATE foo SET name = ? WHERE name = ?", newName, oldName);
     }
 }
