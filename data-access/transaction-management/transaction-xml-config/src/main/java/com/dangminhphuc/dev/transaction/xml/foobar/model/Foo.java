@@ -1,0 +1,13 @@
+package com.dangminhphuc.dev.transaction.xml.foobar.model;
+
+public class Foo {
+    private String name;
+
+    public Foo(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}

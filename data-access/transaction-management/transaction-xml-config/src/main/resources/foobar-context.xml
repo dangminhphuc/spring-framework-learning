@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <!-- 1. Data Source -->
+    <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:foobar-schema.sql"/>
+    </jdbc:embedded-database>
+
+    <!-- 2. Service Beans -->
+    <bean id="barService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.BarServiceImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean id="fooService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.FooServiceImpl">
+        <constructor-arg ref="dataSource"/>
+        <constructor-arg ref="barService"/>
+    </bean>
+    <bean id="readerService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.ReaderServiceImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!-- 3. Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 4. Transactional Advice -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- Propagation Rules -->
+            <tx:method name="insertFooRequired" propagation="REQUIRED"/>
+            <tx:method name="insertFooRequiredThenRollback" propagation="REQUIRED"/>
+            <tx:method name="outerRequired_innerRequiresNew_thenRollbackOuter" propagation="REQUIRED"/>
+            <tx:method name="insertBar" propagation="REQUIRES_NEW"/>
+
+            <!-- Isolation Rules -->
+            <tx:method name="countFoosWithReadUncommitted" isolation="READ_UNCOMMITTED" read-only="true"/>
+            <tx:method name="countFoosWithReadCommitted" isolation="READ_COMMITTED" read-only="true"/>
+
+            <!-- A default for the simple insertFoo method -->
+            <tx:method name="insertFoo" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 5. AOP Configuration -->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut="execution(* com.dangminhphuc.dev.transaction.xml.foobar.service.*.*(..))"/>
+    </aop:config>
+
+</beans>

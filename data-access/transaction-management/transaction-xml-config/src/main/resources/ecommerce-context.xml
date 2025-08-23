@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <!-- 1. Data Source Configuration using Spring's embedded database support -->
+    <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:schema.sql"/>
+    </jdbc:embedded-database>
+
+    <!-- 2. Service Beans -->
+    <bean id="auditService" class="com.dangminhphuc.dev.transaction.xml.example.service.AuditServiceImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="inventoryService" class="com.dangminhphuc.dev.transaction.xml.example.service.InventoryServiceImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="orderService" class="com.dangminhphuc.dev.transaction.xml.example.service.OrderServiceImpl">
+        <constructor-arg ref="dataSource"/>
+        <constructor-arg ref="auditService"/>
+        <constructor-arg ref="inventoryService"/>
+    </bean>
+
+    <!-- 3. Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 4. Transactional Advice -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- For OrderService -->
+            <tx:method name="placeOrder" propagation="REQUIRED" isolation="READ_COMMITTED"/>
+
+            <!-- For AuditService: Run in a completely new transaction -->
+            <tx:method name="logEvent" propagation="REQUIRES_NEW"/>
+
+            <!-- For InventoryService: Run in a nested transaction -->
+            <tx:method name="reserveStock" propagation="NESTED"/>
+
+            <!-- For ReportingService: Demonstrate different isolation levels -->
+            <tx:method name="getOrderCountWithReadUncommitted" isolation="READ_UNCOMMITTED" read-only="true"/>
+            <tx:method name="getOrderCountWithReadCommitted" isolation="READ_COMMITTED" read-only="true"/>
+
+            <!-- Long-running report method with a timeout -->
+            <tx:method name="processLongRunningReport" timeout="2"/>
+
+            <!-- Default for all other methods -->
+            <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 5. AOP Configuration to apply the advice -->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut="execution(* com.dangminhphuc.dev.transaction.xml.service.*.*(..))"/>
+    </aop:config>
+
+</beans>
