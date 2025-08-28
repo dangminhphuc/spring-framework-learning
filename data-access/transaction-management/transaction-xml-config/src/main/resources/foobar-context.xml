@@ -11,11 +11,6 @@
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <!-- 1. Data Source -->
-    <!--
-        We use DriverManagerDataSource and explicitly set MVCC=TRUE.
-        This makes H2's isolation levels behave more like standard production databases,
-        which is critical for this test to pass.
-    -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver"/>
         <property name="url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"/>
@@ -23,10 +18,6 @@
         <property name="password" value=""/>
     </bean>
 
-    <!--
-        This bean initializes the database using our schema script.
-        It's a more robust method than using INIT=RUNSCRIPT in the URL.
-    -->
     <bean id="databaseInitializer" class="org.springframework.jdbc.datasource.init.DataSourceInitializer">
         <property name="dataSource" ref="dataSource"/>
         <property name="databasePopulator">
@@ -41,14 +32,14 @@
     </bean>
 
     <!-- 2. Service Beans -->
-    <bean id="barService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.BarServiceImpl">
+    <bean id="callerService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.CallerServiceImpl">
+        <constructor-arg ref="dataSource"/>
+        <constructor-arg ref="calleeService"/>
+    </bean>
+    <bean id="calleeService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.CalleeServiceImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
-    <bean id="fooService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.FooServiceImpl">
-        <constructor-arg ref="dataSource"/>
-        <constructor-arg ref="barService"/>
-    </bean>
-    <bean id="readerService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.ReaderServiceImpl">
+    <bean id="dataReaderService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.DataReaderServiceImpl">
         <constructor-arg ref="dataSource"/>
     </bean>
 
@@ -61,19 +52,25 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <!-- Propagation Rules -->
-            <tx:method name="insertFooRequired" propagation="REQUIRED"/>
-            <tx:method name="insertFooRequiredThenRollback" propagation="REQUIRED"/>
-            <tx:method name="outerRequired_innerRequiresNew_thenRollbackOuter" propagation="REQUIRED"/>
-            <tx:method name="insertBar" propagation="REQUIRES_NEW"/>
-            <tx:method name="updateFooName" propagation="REQUIRES_NEW"/>
+            <tx:method name="callerRequiredOK_calleeRequiredError_thenRollbackBoth"/>
+            <tx:method name="callerRequiredError_calleeRequiredOK_thenRollbackBoth"/>
+            <tx:method name="callerRequiredError_calleeRequiredError_thenRollbackBoth"/>
+            <tx:method name="callerRequiredError_calleeRequiredNewOK_thenCommitCalleeAndRollbackCaller"/>
+            <tx:method name="callerRequiredNewOK_calleeRequiredError_thenRollbackBoth" propagation="REQUIRES_NEW"/>
+            <tx:method name="callerRequiredNewError_calleeRequiredOK_thenRollbackBoth" propagation="REQUIRES_NEW"/>
+
+            <tx:method name="requiredOK"/>
+            <tx:method name="requiredError"/>
+            <tx:method name="requiredNewOK" propagation="REQUIRES_NEW"/>
+            <tx:method name="requiredNewError" propagation="REQUIRES_NEW"/>
 
             <!-- Isolation Rules -->
+            <tx:method name="countOutersWithReadUncommitted" isolation="READ_UNCOMMITTED" read-only="true"/>
+            <tx:method name="countOutersWithReadCommitted" isolation="READ_COMMITTED" read-only="true"/>
             <tx:method name="readNameTwiceInTransaction" isolation="REPEATABLE_READ"/>
-            <tx:method name="countFoosWithReadUncommitted" isolation="READ_UNCOMMITTED" read-only="true"/>
-            <tx:method name="countFoosWithReadCommitted" isolation="READ_COMMITTED" read-only="true"/>
 
-            <!-- A default for the simple insertFoo method -->
-            <tx:method name="insertFoo" propagation="REQUIRED"/>
+            <!-- A default for the simple insertOuter method -->
+            <tx:method name="insertOuter" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 

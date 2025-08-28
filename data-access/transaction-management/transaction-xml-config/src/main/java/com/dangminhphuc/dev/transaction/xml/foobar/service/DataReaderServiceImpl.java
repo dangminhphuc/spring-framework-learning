@@ -9,24 +9,24 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderServiceImpl implements ReaderService {
-    private static final Logger logger = LoggerFactory.getLogger(ReaderServiceImpl.class);
+public class DataReaderServiceImpl implements DataReaderService {
+    private static final Logger logger = LoggerFactory.getLogger(DataReaderServiceImpl.class);
     private final JdbcTemplate jdbcTemplate;
 
-    public ReaderServiceImpl(DataSource dataSource) {
+    public DataReaderServiceImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
-    public int countFoosWithReadUncommitted() {
-        logger.info("READER_SERVICE: Counting Foos with READ_UNCOMMITTED.");
-        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM foo", Integer.class);
+    public int countOutersWithReadUncommitted() {
+        logger.info("READER_SERVICE: Counting Outers with READ_UNCOMMITTED.");
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM transaction_entity", Integer.class);
     }
 
     @Override
-    public int countFoosWithReadCommitted() {
-        logger.info("READER_SERVICE: Counting Foos with READ_COMMITTED.");
-        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM foo", Integer.class);
+    public int countOutersWithReadCommitted() {
+        logger.info("READER_SERVICE: Counting Outers with READ_COMMITTED.");
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM transaction_entity", Integer.class);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ReaderServiceImpl implements ReaderService {
 
         // First read
         try {
-            String firstRead = jdbcTemplate.queryForObject("SELECT name FROM foo WHERE name = ?", String.class, queriedName);
+            String firstRead = jdbcTemplate.queryForObject("SELECT name FROM transaction_entity WHERE name = ?", String.class, queriedName);
             results.add(firstRead);
             logger.info("READER_SERVICE: First read got name '{}'", firstRead);
         } catch (EmptyResultDataAccessException e) {
@@ -49,7 +49,7 @@ public class ReaderServiceImpl implements ReaderService {
 
         // Second read
         try {
-            String secondRead = jdbcTemplate.queryForObject("SELECT name FROM foo WHERE name = ?", String.class, queriedName);
+            String secondRead = jdbcTemplate.queryForObject("SELECT name FROM transaction_entity WHERE name = ?", String.class, queriedName);
             results.add(secondRead);
             logger.info("READER_SERVICE: Second read got name '{}'", secondRead);
         } catch (EmptyResultDataAccessException e) {
