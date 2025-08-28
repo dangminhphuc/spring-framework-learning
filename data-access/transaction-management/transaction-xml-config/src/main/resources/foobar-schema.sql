@@ -1,7 +1,3 @@
-CREATE TABLE foo (
-    name VARCHAR(255)
-);
-
-CREATE TABLE bar (
+CREATE TABLE transaction_entity (
     name VARCHAR(255)
 );
