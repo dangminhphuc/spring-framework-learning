@@ -15,6 +15,8 @@
 
     <modules>
         <module>transaction-management</module>
+        <module>dao-support</module>
+        <module>with-jdbc</module>
     </modules>
 
     <dependencies>
