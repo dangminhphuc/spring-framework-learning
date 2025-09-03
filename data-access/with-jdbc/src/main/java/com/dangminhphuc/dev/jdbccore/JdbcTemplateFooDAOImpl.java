@@ -1,6 +1,7 @@
 package com.dangminhphuc.dev.jdbccore;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -14,7 +15,8 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+//@Primary
+@Repository("jdbcTemplateImpl")
 public class JdbcTemplateFooDAOImpl implements FooDAO {
 
     private final JdbcTemplate jdbcTemplate;
@@ -59,7 +61,7 @@ public class JdbcTemplateFooDAOImpl implements FooDAO {
     }
 
     @Override
-    public void insert(Foo foo) {
+    public int insert(Foo foo) {
         String sql = "INSERT INTO foo (id, number, string, bool, date, amount) VALUES (:id, :number, :string, :bool, " +
                 ":date, :amount)";
         Map<String, Object> paramMap = Map.of(
@@ -72,15 +74,12 @@ public class JdbcTemplateFooDAOImpl implements FooDAO {
         );
 
         this.namedParameterJdbcTemplate.update(sql, paramMap);
-//        this.jdbcTemplate.update(
-//                sql,
-//                foo.getNumber(),
-//                foo.getString(),
-//                foo.isBool(),
-//                new java.sql.Date(foo.getDate().getTime()),
-//                foo.getAmount()
-//        );
+        return 1;
+    }
 
+    @Override
+    public int[] insert(List<Foo> foos) {
+        return new int[0];
     }
 
     @Override
@@ -111,6 +110,11 @@ public class JdbcTemplateFooDAOImpl implements FooDAO {
                 .addValue("amount", foo.getAmount());
 
         this.namedParameterJdbcTemplate.update(sql, nameParameters);
+    }
+
+    @Override
+    public int[] update(List<Foo> foos) {
+        return new int[0];
     }
 
     @Override

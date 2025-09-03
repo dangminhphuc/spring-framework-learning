@@ -2,11 +2,8 @@ package com.dangminhphuc.dev.jdbccore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 public class JdbcClientFooDAOImpl implements FooDAO {
@@ -33,7 +30,7 @@ public class JdbcClientFooDAOImpl implements FooDAO {
     }
 
     @Override
-    public void insert(Foo foo) {
+    public int insert(Foo foo) {
         String sql = "INSERT INTO foo (id, number, string, bool, date, amount) VALUES (:id, :number, :string, :bool, :date, :amount)";
         this.jdbcClient.sql(sql)
                 .param("id", foo.getId())
@@ -43,6 +40,12 @@ public class JdbcClientFooDAOImpl implements FooDAO {
                 .param("date", foo.getDate())
                 .param("amount", foo.getAmount())
                 .update();
+        return 1;
+    }
+
+    @Override
+    public int[] insert(List<Foo> foos) {
+        return new int[0];
     }
 
     @Override
@@ -52,6 +55,11 @@ public class JdbcClientFooDAOImpl implements FooDAO {
 
     @Override
     public void update(Foo foo) {
+    }
+
+    @Override
+    public int[] update(List<Foo> foos) {
+        return new int[0];
     }
 
     @Override
