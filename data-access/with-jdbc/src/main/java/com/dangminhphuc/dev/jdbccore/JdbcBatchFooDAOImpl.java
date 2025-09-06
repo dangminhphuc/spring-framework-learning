@@ -85,6 +85,6 @@ public class JdbcBatchFooDAOImpl implements FooDAO {
 
     @Override
     public int count() {
-        return 0;
+        return this.jdbcTemplate.queryForObject("SELECT COUNT(*) FROM foo", Integer.class);
     }
 }

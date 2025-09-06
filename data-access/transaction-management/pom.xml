@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>transaction-setting-isolation</module>
+<!--        <module>transaction-setting-isolation</module>-->
         <module>transaction-xml-config</module>
         <module>transaction-bound-events</module>
     </modules>
