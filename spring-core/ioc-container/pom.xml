@@ -16,7 +16,7 @@
         <module>bean-definition</module>
         <module>bean-definition-advance</module>
         <module>extension-points</module>
-        <module>environment</module>
+<!--        <module>environment</module>-->
         <module>i18n</module>
         <module>application-event</module>
     </modules>

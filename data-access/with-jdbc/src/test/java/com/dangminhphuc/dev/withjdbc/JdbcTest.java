@@ -22,6 +22,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class JdbcTest {
     class JdbcTemplateTest {
         @Test
         void testGetById() {
-            var foo = jdbcTemplate.getById(1L);
+            Foo foo = jdbcTemplate.getById(1L);
 
             assertNotNull(foo);
             assertEquals(1L, foo.getId());
@@ -80,20 +81,20 @@ public class JdbcTest {
 
         @Test
         void testGetAll() {
-            var foos = jdbcTemplate.getAll();
+            List<Foo> foos = jdbcTemplate.getAll();
             assertNotNull(foos);
             assertEquals(3, foos.size());
         }
 
         @Test
         void testCount() {
-            var count = jdbcTemplate.count();
+            int count = jdbcTemplate.count();
             assertEquals(3, count);
         }
 
         @Test
         void testInsert() {
-            var foo = new com.dangminhphuc.dev.jdbccore.Foo();
+            Foo foo = new com.dangminhphuc.dev.jdbccore.Foo();
             foo.setNumber(456);
             foo.setString("gamma");
             foo.setBool(false);
@@ -113,7 +114,7 @@ public class JdbcTest {
 
         @Test
         void testInsertAndGetId() {
-            var foo = new com.dangminhphuc.dev.jdbccore.Foo();
+            Foo foo = new com.dangminhphuc.dev.jdbccore.Foo();
             foo.setNumber(456);
             foo.setString("gamma");
             foo.setBool(false);
@@ -127,7 +128,7 @@ public class JdbcTest {
 
         @Test
         void testUpdate() {
-            var foo = new com.dangminhphuc.dev.jdbccore.Foo();
+            Foo foo = new com.dangminhphuc.dev.jdbccore.Foo();
             foo.setId(3L);
             foo.setNumber(999);
             foo.setString("beta");
@@ -155,7 +156,7 @@ public class JdbcTest {
 
         @BeforeEach
         void setUp() throws SQLException {
-            try (var connection = dataSource.getConnection()) {
+            try (Connection connection = dataSource.getConnection()) {
                 ScriptUtils.executeSqlScript(connection, new ClassPathResource("schema.sql"));
                 ScriptUtils.executeSqlScript(connection, new ClassPathResource("cleanup.sql"));
                 ScriptUtils.executeSqlScript(connection, new ClassPathResource("initial.sql"));
@@ -169,7 +170,7 @@ public class JdbcTest {
             int size = 100;
             List<Foo> foos = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                var foo = new com.dangminhphuc.dev.jdbccore.Foo();
+                Foo foo = new com.dangminhphuc.dev.jdbccore.Foo();
                 foo.setNumber(100 + i);
                 foo.setString("string " + i);
                 foo.setBool(i % 2 == 0);
@@ -191,7 +192,7 @@ public class JdbcTest {
             int size = 3;
             List<Foo> foos = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                var foo = new com.dangminhphuc.dev.jdbccore.Foo();
+                Foo foo = new com.dangminhphuc.dev.jdbccore.Foo();
                 foo.setId(i + 1L);
                 foo.setNumber(200 + i);
                 foo.setString("updated string " + i);
@@ -215,7 +216,7 @@ public class JdbcTest {
 
         @Test
         void testInsert() {
-            var foo = new Foo();
+            Foo foo = new Foo();
             foo.setNumber(456);
             foo.setString("gamma");
             foo.setBool(false);
@@ -228,7 +229,7 @@ public class JdbcTest {
 
         @Test
         void testInsertAndReturnId() {
-            var foo = new Foo();
+            Foo foo = new Foo();
             foo.setNumber(456);
             foo.setString("gamma");
             foo.setBool(false);
@@ -255,7 +256,7 @@ public class JdbcTest {
     class MappingSqlQueryTest {
         @Test
         void testGetByProcedure() {
-            var foo = modelingJdbc.getById(1L);
+            Foo foo = modelingJdbc.getById(1L);
 
             assertNotNull(foo);
             assertEquals(1L, foo.getId());
@@ -267,7 +268,7 @@ public class JdbcTest {
 
         @Test
         void testUpdate() {
-            var foo = new Foo();
+            Foo foo = new Foo();
             foo.setId(3L);
             foo.setNumber(999);
             foo.setString("beta");

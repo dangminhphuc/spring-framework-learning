@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>aspectj-support</module>
+        <module>aspectJ-support</module>
         <module>aop-api</module>
     </modules>
 
