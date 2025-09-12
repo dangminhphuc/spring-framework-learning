@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <!-- 1. Data Source -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="databaseInitializer" class="org.springframework.jdbc.datasource.init.DataSourceInitializer">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="databasePopulator">
+            <bean class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator">
+                <property name="scripts">
+                    <list>
+                        <value>classpath:foobar-schema.sql</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- 2. Service Beans -->
+    <bean id="callerService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.CallerServiceImpl">
+        <constructor-arg ref="dataSource"/>
+        <constructor-arg ref="calleeService"/>
+    </bean>
+    <bean id="calleeService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.CalleeServiceImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+    <bean id="dataReaderService" class="com.dangminhphuc.dev.transaction.xml.foobar.service.DataReaderServiceImpl">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!-- 3. Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 4. Transactional Advice -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- Propagation Rules -->
+            <tx:method name="callerRequiredOK_calleeRequiredError_thenRollbackBoth"/>
+            <tx:method name="callerRequiredError_calleeRequiredOK_thenRollbackBoth"/>
+            <tx:method name="callerRequiredError_calleeRequiredError_thenRollbackBoth"/>
+            <tx:method name="callerRequiredError_calleeRequiredNewOK_thenCommitCalleeAndRollbackCaller"/>
+            <tx:method name="callerRequiredNewOK_calleeRequiredError_thenRollbackBoth" propagation="REQUIRES_NEW"/>
+            <tx:method name="callerRequiredNewError_calleeRequiredOK_thenRollbackBoth" propagation="REQUIRES_NEW"/>
+
+            <tx:method name="requiredOK"/>
+            <tx:method name="requiredError"/>
+            <tx:method name="requiredNewOK" propagation="REQUIRES_NEW"/>
+            <tx:method name="requiredNewError" propagation="REQUIRES_NEW"/>
+
+            <!-- Isolation Rules -->
+            <tx:method name="countOutersWithReadUncommitted" isolation="READ_UNCOMMITTED" read-only="true"/>
+            <tx:method name="countOutersWithReadCommitted" isolation="READ_COMMITTED" read-only="true"/>
+            <tx:method name="readNameTwiceInTransaction" isolation="REPEATABLE_READ"/>
+
+            <!-- A default for the simple insertOuter method -->
+            <tx:method name="insertOuter" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 5. AOP Configuration -->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut="execution(* com.dangminhphuc.dev.transaction.xml.foobar.service.*.*(..))"/>
+    </aop:config>
+
+</beans>
