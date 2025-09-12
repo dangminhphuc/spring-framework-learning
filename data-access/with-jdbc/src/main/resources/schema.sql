@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS foo;
+
+CREATE TABLE IF NOT EXISTS foo (
+    id BIGSERIAL PRIMARY KEY,
+    number INTEGER NOT NULL,
+    string VARCHAR(255),
+    bool BOOLEAN NOT NULL,
+    date DATE,
+    amount DECIMAL(19,2)
+);
