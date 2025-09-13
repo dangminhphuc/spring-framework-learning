@@ -1,3 +1,63 @@
-# Default ignored files
-.idea/
+# =========================
+# Maven build
+# =========================
 target/
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# Eclipse specific
+.project
+.classpath
+.settings/
+.apt_generated/
+.factorypath
+
+# IntelliJ IDEA specific
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# VS Code specific
+.vscode/
+
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Java garbage
+*.class
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# JRebel / Hot reload
+rebel.xml
+
+# Test reports
+surefire-reports/
+failsafe-reports/
+
+# Coverage
+jacoco.exec
+jacoco-report/
+*.lcov
+coverage/
+
+# Other IDE caches
+.gradle/
