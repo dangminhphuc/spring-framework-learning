@@ -1,6 +1,9 @@
 # =========================
 # Maven build
 # =========================
+# =========================
+# Maven build
+# =========================
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !.mvn/wrapper/maven-wrapper.properties
@@ -21,6 +24,7 @@ out/
 
 # VS Code specific
 .vscode/
+!.vscode/settings.json
 
 # NetBeans specific
 nbproject/private/
