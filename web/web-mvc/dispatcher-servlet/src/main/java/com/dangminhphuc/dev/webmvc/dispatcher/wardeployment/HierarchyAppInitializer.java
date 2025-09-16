@@ -1,4 +1,4 @@
-package com.dangminhphuc.dev.webmvc.dispatcher.hierarchy;
+package com.dangminhphuc.dev.webmvc.dispatcher.wardeployment;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -8,20 +8,20 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-public class WebAppInitializer implements WebApplicationInitializer {
+public class HierarchyAppInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         // Create the root WebApplicationContext
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(RootConfig.class);
+        rootContext.register(ProgrammaticConfig.class);
 
         // Manage the lifecycle of the root WebApplicationContext
         servletContext.addListener(new ContextLoaderListener(rootContext));
 
         // Create the dispatcher servlet's context
         AnnotationConfigWebApplicationContext dispatcherContext1 = new AnnotationConfigWebApplicationContext();
-        dispatcherContext1.register(MvcConfig1.class);
+        dispatcherContext1.register(ProgrammaticConfig.class);
 
         // Register and map the dispatcher servlet
         ServletRegistration.Dynamic dispatcher1 = servletContext.addServlet("dispatcher1", new DispatcherServlet(dispatcherContext1));
@@ -30,7 +30,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         // Create the second dispatcher servlet's context
         AnnotationConfigWebApplicationContext dispatcherContext2 = new AnnotationConfigWebApplicationContext();
-        dispatcherContext2.register(MvcConfig2.class);
+        dispatcherContext2.register(ProgrammaticConfig.class);
 
         // Register and map the second dispatcher servlet
         ServletRegistration.Dynamic dispatcher2 = servletContext.addServlet("dispatcher2", new DispatcherServlet(dispatcherContext2));

@@ -19,7 +19,6 @@ public class EmbeddedJettyServer {
         ContextHandler handler = servletInitializer.contextHandler();
         server.setHandler(handler);
         server.start();
-        System.out.println("=====" + this.servletInitializer);
     }
 
     public void stop() throws Exception {
