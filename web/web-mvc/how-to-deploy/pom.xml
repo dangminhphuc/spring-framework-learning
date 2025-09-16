@@ -5,16 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.dangminhphuc.dev</groupId>
-        <artifactId>web</artifactId>
+        <artifactId>web-mvc</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>web-mvc</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>dispatcher-servlet</module>
-        <module>how-to-deploy</module>
-    </modules>
+    <artifactId>how-to-deploy</artifactId>
 
 </project>
