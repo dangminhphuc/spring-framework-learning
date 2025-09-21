@@ -9,7 +9,6 @@
 
     <modules>
         <module>spring-core</module>
-        <module>model-example</module>
         <module>data-access</module>
     </modules>
 
