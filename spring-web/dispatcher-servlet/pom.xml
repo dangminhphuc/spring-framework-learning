@@ -14,56 +14,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>war-deployment</module>
+<!--        <module>war-deployment</module>-->
         <module>jar-deployment</module>
+        <module>context-hierarchy</module>
+        <module>special-bean-types</module>
     </modules>
 
-<!--    <dependencies>-->
-<!--        &lt;!&ndash; Spring Web MVC &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-webmvc</artifactId>-->
-<!--            <version>${spring.version}</version>-->
-<!--        </dependency>-->
-<!--        -->
-<!--        &lt;!&ndash; Spring Context &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-context</artifactId>-->
-<!--        </dependency>-->
-<!--        -->
-<!--        &lt;!&ndash; Servlet API &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>jakarta.servlet</groupId>-->
-<!--            <artifactId>jakarta.servlet-api</artifactId>-->
-<!--            <version>6.0.0</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        -->
-<!--        &lt;!&ndash; Spring Test &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-test</artifactId>-->
-<!--        </dependency>-->
-<!--        -->
-<!--        &lt;!&ndash; JUnit &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-api</artifactId>-->
-<!--        </dependency>-->
-<!--        -->
-<!--        &lt;!&ndash; Mockito &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.mockito</groupId>-->
-<!--            <artifactId>mockito-core</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        -->
-<!--        &lt;!&ndash; Lombok &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--        </dependency>-->
-<!--    </dependencies>-->
 
 </project>
