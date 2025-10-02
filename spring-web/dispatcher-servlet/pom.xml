@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -9,16 +9,67 @@
         <version>1.0.0</version>
     </parent>
 
-    <name>DispatcherServlet Example</name>
+    <name>Dispatcher Servlet</name>
     <artifactId>dispatcher-servlet</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-<!--        <module>war-deployment</module>-->
-        <module>jar-deployment</module>
-        <module>context-hierarchy</module>
-        <module>special-bean-types</module>
+        <!--&lt;!&ndash;        <module>war-deployment</module>&ndash;&gt;-->
+        <!--        <module>jar-deployment</module>-->
+        <!--        <module>context-hierarchy</module>-->
+        <!--        <module>special-bean-types</module>-->
+        <module>view-resolution</module>
     </modules>
 
+    <dependencies>
+        <!-- Spring MVC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
+
+        <!-- Embedded Jetty -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+        </dependency>
+    </dependencies>
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            &lt;!&ndash; Plugin để compile Java &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>3.11.0</version>-->
+<!--                <configuration>-->
+<!--                    <source>${java.version}</source>-->
+<!--                    <target>${java.version}</target>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+<!--            &lt;!&ndash; Jetty plugin &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>org.eclipse.jetty</groupId>-->
+<!--                <artifactId>jetty-maven-plugin</artifactId>-->
+<!--                <version>11.0.20</version>-->
+<!--                <configuration>-->
+<!--                    <webApp>-->
+<!--                        <contextPath>/</contextPath>-->
+<!--                    </webApp>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>
